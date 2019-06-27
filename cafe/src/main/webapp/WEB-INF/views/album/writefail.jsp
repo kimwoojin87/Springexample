@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="ko">
-<head>
-<title>글입력 실패</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
-</head>
-
-<body>
+<%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
 
 <table width="100%" cellpadding="6" cellspacing="2" border="0"
 	bgcolor="#ffffff" style="border: #e1e1e1 solid 1px">
@@ -39,5 +28,4 @@
 	</tr>
 </table>
 <br>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>

@@ -1,30 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="ko">
-<head>
-<title>게시판 글쓰기</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
-<script type="text/javascript">
-function writeArticle(){
-	if(document.writeForm.subject.value == ""){
-		alert("제목을 입력하세요");
-		return;
-	}else if(document.writeForm.content.value == ""){
-		alert("내용을 입력하세요");
-		return;
-	}else{
-		document.writeForm.action = "";
-		document.writeForm.submit();
-	}
-}
-</script>
-</head>
-
-<body>
+<%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
 <!-- title -->
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>
@@ -44,7 +20,7 @@ function writeArticle(){
 	<tr>
 		<td><img src="${root}/img/board/icon_arrow_04.gif" width="4"
 			height="11" border="0" align="absmiddle" vspace="4"></td>
-		<td width="100%" style="padding-left: 4px"><b>글쓰기</b></td>
+		<td width="100%" style="padding-left: 4px"><b>답글쓰기</b></td>
 	</tr>
 	<tr>
 		<td width="630" colspan="2" height="2" class="bg_board_title_02"></td>
@@ -56,9 +32,6 @@ function writeArticle(){
 	style="margin: 0px">
 <div id="attach_file_hdn"></div>
 
-<input type="hidden" name="" value="">
-<input type="hidden" name="" value="">
-<input type="hidden" name="" value="">
 <input type="hidden" name="" value="">
 
 <table border="0" cellpadding="5" cellspacing="0" width="630"
@@ -108,5 +81,4 @@ function writeArticle(){
 </form>
 <br>
 <br>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>
