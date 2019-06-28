@@ -3,6 +3,7 @@ package com.kitri.cafe.board.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,32 +26,33 @@ public class ReboardController {
 
 	@Autowired
 	private CommonService commonService;
-
+	
 	@Autowired
 	private ReboardService reboardService;
-
+	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public void write(@RequestParam Map<String, String> parameter, Model model) {
 		model.addAttribute("parameter", parameter);
 	}
-
+	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(ReboardDto reboardDto, @RequestParam Map<String, String> parameter, Model model,
-			HttpSession session) {
+	public String write(ReboardDto reboardDto, 
+				@RequestParam Map<String, String> parameter, 
+				Model model, HttpSession session) {
 		String path = "";
-
+		
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-		if (memberDto != null) {
+		if(memberDto != null) {
 			int seq = commonService.getNextSeq();
 			reboardDto.setSeq(seq);
 			reboardDto.setId(memberDto.getId());
 			reboardDto.setName(memberDto.getName());
 			reboardDto.setEmail(memberDto.getEmail());
 			reboardDto.setRef(seq);
-
+			
 			seq = reboardService.writeArticle(reboardDto);
-
-			if (seq != 0) {
+			
+			if(seq != 0) {
 				model.addAttribute("seq", seq);
 				path = "reboard/writeok";
 			} else {
@@ -59,20 +61,19 @@ public class ReboardController {
 		} else {
 			path = "";
 		}
-
 		model.addAttribute("parameter", parameter);
 		return path;
 	}
-
+	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view(@RequestParam("seq") int seq, @RequestParam Map<String, String> parameter, Model model,
-			HttpSession session) {
-
-		String path ="";
+	public String view(@RequestParam("seq") int seq, 
+			@RequestParam Map<String, String> parameter, 
+			Model model, HttpSession session) {
+		String path = "";
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-		if (memberDto != null) {
+		if(memberDto != null) {
 			ReboardDto reboardDto = reboardService.viewArticle(seq);
-
+			
 			model.addAttribute("article", reboardDto);
 			model.addAttribute("parameter", parameter);
 			path = "reboard/view";
@@ -83,7 +84,7 @@ public class ReboardController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(@RequestParam Map<String, String> parameter, Model model,HttpServletRequest request) {
+	public void list(@RequestParam Map<String, String> parameter, Model model, HttpServletRequest request) {
 		
 		List<ReboardDto> list = reboardService.listArticle(parameter);
 		PageNavigation pageNavigation = commonService.getPageNavigation(parameter);
@@ -93,7 +94,62 @@ public class ReboardController {
 		model.addAttribute("parameter", parameter);
 		model.addAttribute("articleList", list);
 		model.addAttribute("navigator", pageNavigation);
-		
 	}
-
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public String reply(@RequestParam("seq") int seq,
+			@RequestParam Map<String, String> parameter, 
+			Model model, HttpSession session) {
+		String path = "";
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if(memberDto != null) {
+			ReboardDto reboardDto = reboardService.getArticle(seq);
+			
+			model.addAttribute("article", reboardDto);
+			model.addAttribute("parameter", parameter);
+			path = "reboard/reply";
+		} else {
+			path = "redirect:/index.jsp";
+		}
+		return path;
+	}
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	public String reply(ReboardDto reboardDto, 
+				@RequestParam Map<String, String> parameter, 
+				Model model, HttpSession session) {
+		String path = "";
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if(memberDto != null) {
+			int seq = commonService.getNextSeq();
+			reboardDto.setSeq(seq);
+			reboardDto.setId(memberDto.getId());
+			reboardDto.setName(memberDto.getName());
+			reboardDto.setEmail(memberDto.getEmail());
+			
+			
+			seq = reboardService.replyArticle(reboardDto);
+			
+			if(seq != 0) {
+				model.addAttribute("seq", seq);
+				path = "reboard/writeok";
+			} else {
+				path = "reboard/writefail";
+			}
+		} else {
+			path = "";
+		}
+		model.addAttribute("parameter", parameter);
+		return path;
+	}
+	
 }
+
+
+
+
+
+
+
+

@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
+<%@ include file="/WEB-INF/views/commons/template/top.jsp" %>
+<%@ include file="/WEB-INF/views/commons/logincheck.jsp" %>
+<%@ include file="/WEB-INF/views/commons/board_common.jsp" %>
 <script>
 $(document).ready(function() {
-	$("#writeBtn").click(function(){
-		if($("#subject").val() == ""){
+	
+	$("#writeBtn").click(function() {
+		if($("#subject").val() == "") {
 			alert("제목 입력!!!");
-		}else if($("#content").val() == ""){
+			return;
+		} else if($("#content").val() == "") {
 			alert("내용 입력!!!");
-		}else{
-			$("#writeForm").attr("action","${root}/reboard/write").submit();
+			return;
+		} else {
+			$("#writeForm").attr("action", "${root}/reboard/write").submit();
 		}
-		
-			
-			
 	});
 	
 });
@@ -72,7 +74,7 @@ $(document).ready(function() {
 		<td width="620" nowrap style="padding-left: 8px; padding-top: 10px"
 			colspan="5"><img src="${root}/img/board/e_dot.gif" width="4"
 			height="4" border="0" align="absmiddle"> <b>글내용</b> <textarea
-			id="content" name="content" class="inp_02" cols="67" rows="25" scrollbars="no"></textarea>
+			name="content" id="content" class="inp_02" cols="67" rows="25" scrollbars="no"></textarea>
 		</td>
 	</tr>
 </table>
@@ -101,4 +103,4 @@ $(document).ready(function() {
 </form>
 <br>
 <br>
-<%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>
+<%@ include file="/WEB-INF/views/commons/template/bottom.jsp" %>
