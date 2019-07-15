@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
+<%@ include file="/WEB-INF/views/commons/template/top.jsp" %>
 <!-- title -->
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>
@@ -81,4 +81,4 @@
 </form>
 <br>
 <br>
-<%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>
+<%@ include file="/WEB-INF/views/commons/template/bottom.jsp" %>

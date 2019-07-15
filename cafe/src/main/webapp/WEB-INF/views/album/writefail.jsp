@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
-
+<%@ include file="/WEB-INF/views/commons/template/top.jsp" %>
 <table width="100%" cellpadding="6" cellspacing="2" border="0"
 	bgcolor="#ffffff" style="border: #e1e1e1 solid 1px">
 	<tr>
@@ -28,4 +27,4 @@
 	</tr>
 </table>
 <br>
-<%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>
+<%@ include file="/WEB-INF/views/commons/template/bottom.jsp" %>
